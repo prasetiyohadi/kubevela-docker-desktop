@@ -1,0 +1,17 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: vela-go-server
+spec:
+  components:
+    - name: vela-go-server
+      type: webservice
+      properties:
+        image: pras/simple-go-server
+        port: 80
+      traits:
+        - type: ingress
+          properties:
+            domain: vela-go-server.127.0.0.1.nip.io
+            http:
+              "/": 80

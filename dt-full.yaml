@@ -1,0 +1,29 @@
+---
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: vela-go-server
+spec:
+  components:
+    - name: backend
+      type: backend
+      properties:
+        image: alpine
+        cmd:
+          - sleep
+          - "1000000"
+    - name: frontend
+      type: frontend
+      properties:
+        name: frontend
+        image: pras/simple-go-server
+        port: 80
+      traits:
+        - type: autoscaler
+          properties:
+            min: 3
+        - type: ingress
+          properties:
+            domain: vela-go-server.127.0.0.1.nip.io
+            http:
+              "/": 80

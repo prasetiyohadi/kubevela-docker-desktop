@@ -1,0 +1,17 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: python-vela-app
+spec:
+  components:
+    - name: python-server
+      type: webservice
+      properties:
+        image: pras/simple-python-server
+        port: 8080
+      traits:
+        - type: ingress
+          properties:
+            domain: testsvc.127.0.0.1.nip.io
+            http:
+              "/": 8080
